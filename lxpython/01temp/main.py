@@ -34,7 +34,9 @@ def main():
         {'input_doc_name': '18宁西线屈原岗站区间综合监控系统配置清单(BOM表).xlsx',
          'input_doc_way': '/svn/ApplicationDesign/controled/88 宁西线（郑州局）_AG18014A_A/1南阳西站/Document/',
          'input_doc_svn_num': 23432},
-    ]
+    ],
+    'test_result_1' : 'mounoodfgjd',
+    'test_result_2' : 'gsgsgsfse'
     }
 
     tpl.render(context)
