@@ -8,6 +8,14 @@
 from docx import Document
 from docxtpl import DocxTemplate
 
+req_list_dic = {'req_name' : '2018.07.04.测试申请单-宁西线（郑州局）-WC183829X',
+        'req_way' : '/svn/ApplicationDesign/tags/88 宁西线（郑州局）_AG18014A_A/2018年7月4日数据测试申请-WC183829X',
+        'req_svn_num' : 37473}
+def req_list_wirte(req_list_dic):
+    req_list = []
+    req_list.append(req_list_dic)
+
+
 def main():
 
     tpl = DocxTemplate('模板.docx')
