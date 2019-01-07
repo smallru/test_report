@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TestReport>
+  <!--首页车站信息配置-->
+  <DataVersion>V1.0.0</DataVersion>
+  <!--测试申请单-->
+  <TestRequestList>
+    <req_name>2018.07.04.测试申请单-宁西线（郑州局）-WC183829X</req_name>
+    <req_way>/svn/ApplicationDesign/tags/88 宁西线（郑州局）_AG18014A_A/2018年7月4日数据测试申请-WC183829X</req_way>
+    <req_svn_num>37473</req_svn_num>
+  </TestRequestList>
+  <TestRequestList>
+    <req_name>2019.07.04.测试申请单-宁西线（郑州局）-WC183829X</req_name>
+    <req_way>/svn/ApplicationDesign/tags/88 宁西线（郑州局）_AG18014A_A/2018年7月4日数据测试申请-WC183829X</req_way>
+    <req_svn_num>37473</req_svn_num>
+  </TestRequestList>
+  <!--测试输入文档-->
+  <FdtEnableUdp>0</FdtEnableUdp>
+  <FdtUdpReceivePort>41010</FdtUdpReceivePort>
+  <FdtUdpSendPort>10010</FdtUdpSendPort>
+  <FdtRemoteIp>192.168.1.50</FdtRemoteIp>
+  <!--测试对象-->
+  <A1>COM7</A1>
+  <A2>COM8</A2>
+  <B1>COM9</B1>
+  <B2>COM10</B2>
+  <!--测试配合项-->
+  <TestMatchUp>115200</TestMatchUp>
+  <!--测试过程-->
+  <TestProcess>1</TestProcess>
+  <!--测试结果-->
+  <TestResult>
+    <test_result_1>某某车站，的某某通过</test_result_1>
+    <test_result_2>bbbbbbbbb</test_result_2>
+  </TestResult>
+</TestReport>
