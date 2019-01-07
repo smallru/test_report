@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #encoding: utf-8
 """
 @project=01temp
@@ -33,3 +34,15 @@ def main():
         print("test_result_2: %s" % test_result_2.childNodes[0].data)
 if __name__ == '__main__':
     main()
+=======
+
+
+
+
+
+
+
+#---------用于测试-----------#
+if __name__ == '__main__':
+    pass
+>>>>>>> 33769d8b7d6dc0e92a5c196ca5fdc16c0086a42e
