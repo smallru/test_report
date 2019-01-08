@@ -21,8 +21,8 @@ class Read_xml(object):
         a = {}
         daughter_tag = parent.getElementsByTagName(daughter)[0].childNodes[0].data
         print(daughter_tag)
-        a[daughter]:1
-        print(a)
+        self.xml_dic[daughter] = daughter_tag
+        #print(self.xml_dic)
 
     def read_third_tag(self,parent,daughter,*grandsons):
         """读取三层标签函数"""
@@ -33,7 +33,8 @@ class Read_xml(object):
             for grandson in grandsons:
                 daughter_tag_dic[grandson] = daughter.getElementsByTagName(grandson)[0].childNodes[0].data
             daughter_tag_list.append(daughter_tag_dic)
-        print(daughter_tag_list)
+        self.xml_dic[daughter] = daughter_tag_list
+        #print(self.xml_dic)
 
 if __name__ == '__main__':
     # 使用minidom解析器打开 XML 文档
@@ -44,4 +45,4 @@ if __name__ == '__main__':
     read_xml.read_third_tag(TestReport,'TestRequestList','req_name','req_way','req_svn_num')
     read_xml.read_third_tag(TestReport, 'TestInputDocument', 'input_doc_name', 'input_doc_way', 'input_doc_svn_num')
     read_xml.read_second_tag(TestReport,'test_result_1')
-    #print(read_xml)
+    print(read_xml.xml_dic)
