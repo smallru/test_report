@@ -3,8 +3,7 @@
 #from docx import Document
 from docxtpl import DocxTemplate
 
-
-#import read
+import read
 #import write
 
 class Output(object):
@@ -13,18 +12,15 @@ class Output(object):
         self.station_name = '白马垅站'
         self.document_num = 'WC12345'
         self.PM_num = '12345'
-    def test_req(self):
+        req_list_dic = {'req_name': '2018.07.04.测试申请单-宁西线（郑州局）-WC183829X',
+                    'req_way': '/svn/ApplicationDesign/tags/88 宁西线（郑州局）_AG18014A_A/2018年7月4日数据测试申请-WC183829X',
+                    'req_svn_num': 37473}
 
+    def req_list_wirte(req_list_dic):
+        req_list = []
+        req_list.append(req_list_dic)
 
 #-----------------主程序内容-------------------------#
-req_list_dic = {'req_name' : '2018.07.04.测试申请单-宁西线（郑州局）-WC183829X',
-        'req_way' : '/svn/ApplicationDesign/tags/88 宁西线（郑州局）_AG18014A_A/2018年7月4日数据测试申请-WC183829X',
-        'req_svn_num' : 37473}
-def req_list_wirte(req_list_dic):
-    req_list = []
-    req_list.append(req_list_dic)
-
-
 def main():
     tpl = DocxTemplate('工程数据测试报告模板.docx')
     output = Output()
@@ -33,14 +29,7 @@ def main():
                'station_name' : output.station_name,
                'document_num':output.document_num,
                'PM_num': output.PM_num,
-               'test_req': [
-                   {'req_name' : '2018.08.25测试申请单-京广线-WC185443X',
-                    'req_way' : '/svn/ApplicationDesign/tags/17京广线/2018年8月26日数据测试申请-WC185443X',
-                    'req_svn_num': 41259,},
-                   {'req_name': '2018.10.11测试申请单-京广线-WC186688X',
-                    'req_way': '/svn/ApplicationDesign/tags/17京广线/2018年10月12日数据测试申请-WC186688X',
-                    'req_svn_num' : 45525,},
-               ],
+               'test_req': read.Read_xml.TestRequestList_list,
                'input_doc': [
                    {'input_doc_name': '宁西线（郑州局）区间综合监控系统应用设计方案.docx',
                     'input_doc_way': '/svn/ApplicationDesign/controled/88 宁西线（郑州局）_AG18014A_A/1南阳西站/Document/',
@@ -81,13 +70,7 @@ def main():
 # 用python-docx模块只能添加重写文档，不能用以修改模板
 """
     document = Document('测试报告模板.docx')
-    
     paragraph = document.add_paragraph('测试报告')
-    paragraph = document.add_paragraph('测试报告')
-    prior_paragraph = paragraph.insert_paragraph_before('附加险')
-    document.add_heading('The REAL meaning of the universe', level=2)
-    table = document.add_table(rows=2, cols=2)
-
     document.save('test1.docx')
 """
 

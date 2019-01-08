@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <TestReport>
-  <!--首页车站信息配置-->
-  <DataVersion>V1.0.0</DataVersion>
+  <!--车站文档信息配置-->
+  <TestReportName>区间综合监控系统工程数据测试报告（京广线-白马垅站）区间综合监控系统工程数据测试报告（京广线-白马垅站）</TestReportName>
+  <document_num>WC187650X</document_num>
+  <project_num>GC-QJK-JGTL-16-038</project_num>
   <!--测试申请单-->
   <TestRequestList>
     <req_name>2018.07.04.测试申请单-宁西线（郑州局）-WC183829X</req_name>
@@ -14,10 +16,26 @@
     <req_svn_num>37473</req_svn_num>
   </TestRequestList>
   <!--测试输入文档-->
-  <FdtEnableUdp>0</FdtEnableUdp>
-  <FdtUdpReceivePort>41010</FdtUdpReceivePort>
-  <FdtUdpSendPort>10010</FdtUdpSendPort>
-  <FdtRemoteIp>192.168.1.50</FdtRemoteIp>
+  <TestInputDocument>
+    <input_doc_name>宁西线（郑州局）区间综合监控系统应用设计方案.docx</input_doc_name>
+    <input_doc_way>/svn/ApplicationDesign/controled/88 宁西线（郑州局）_AG18014A_A/1南阳西站/Document/</input_doc_way>
+    <input_doc_svn_num>20230</input_doc_svn_num>
+  </TestInputDocument>
+    <TestInputDocument>
+    <input_doc_name>18宁西线屈原岗站区间综合监控系统应用设计方案.doc</input_doc_name>
+    <input_doc_way>/svn/ApplicationDesign/controled/88 宁西线（郑州局）_AG18014A_A/1南阳西站/Document/</input_doc_way>
+    <input_doc_svn_num>20234</input_doc_svn_num>
+  </TestInputDocument>
+    <TestInputDocument>
+    <input_doc_name>18宁西线屈原岗站解锁盘盘面图.dwg</input_doc_name>
+    <input_doc_way>/svn/ApplicationDesign/controled/88 宁西线（郑州局）_AG18014A_A/1南阳西站/Document/</input_doc_way>
+    <input_doc_svn_num>223120</input_doc_svn_num>
+  </TestInputDocument>
+  <TestInputDocument>
+    <input_doc_name>18宁西线屈原岗站区间综合监控系统配置清单(BOM表).xlsx</input_doc_name>
+    <input_doc_way>/svn/ApplicationDesign/controled/88 宁西线（郑州局）_AG18014A_A/1南阳西站/Document/</input_doc_way>
+    <input_doc_svn_num>20230</input_doc_svn_num>
+  </TestInputDocument>
   <!--测试对象-->
   <A1>COM7</A1>
   <A2>COM8</A2>
@@ -28,8 +46,6 @@
   <!--测试过程-->
   <TestProcess>1</TestProcess>
   <!--测试结果-->
-  <TestResult>
-    <test_result_1>某某车站，的某某通过</test_result_1>
-    <test_result_2>bbbbbbbbb</test_result_2>
-  </TestResult>
+  <test_result_1>1111</test_result_1>
+  <test_result_2>bbbbbbbbb</test_result_2>
 </TestReport>

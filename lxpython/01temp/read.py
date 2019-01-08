@@ -8,28 +8,40 @@
 from xml.dom.minidom import parse
 import xml.dom.minidom
 
-def get(parent,child):
-    return parent.getElementsByTagName(child)[0].childNodes[0].data
+class Read_xml(object):
+    """读取XML文件类"""
+    def __init__(self):
+        self.xml_dic = {}
 
-def main():
+    def __str__(self):
+        return self.xml_dic
 
+    def read_second_tag(self,parent,daughter):
+        """读取二层标签函数"""
+        a = {}
+        daughter_tag = parent.getElementsByTagName(daughter)[0].childNodes[0].data
+        print(daughter_tag)
+        a[daughter]:1
+        print(a)
+
+    def read_third_tag(self,parent,daughter,*grandsons):
+        """读取三层标签函数"""
+        daughters = parent.getElementsByTagName(daughter)
+        daughter_tag_list = []
+        daughter_tag_dic = {}
+        for daughter in daughters:
+            for grandson in grandsons:
+                daughter_tag_dic[grandson] = daughter.getElementsByTagName(grandson)[0].childNodes[0].data
+            daughter_tag_list.append(daughter_tag_dic)
+        print(daughter_tag_list)
+
+if __name__ == '__main__':
     # 使用minidom解析器打开 XML 文档
     DOMTree = xml.dom.minidom.parse("test_report.xml")
     TestReport = DOMTree.documentElement
 
-    # 在集合中获取所有测试申请单
-    TestRequestLists = TestReport.getElementsByTagName('TestRequestList')
-    # 在集合中获取所有测试结果
-    TestResults = TestReport.getElementsByTagName('TestResult')
-
-    for TestRequestList in TestRequestLists:
-        req_name = get(TestRequestList,'req_name')
-        print(req_name)
-
-    for TestResult in TestResults:
-        test_result_1 = TestResult.getElementsByTagName('test_result_1')[0].childNodes[0].data
-        print(test_result_1)
-        test_result_2 = TestResult.getElementsByTagName('test_result_2')[0]
-        print("test_result_2: %s" % test_result_2.childNodes[0].data)
-if __name__ == '__main__':
-    main()
+    read_xml = Read_xml()
+    read_xml.read_third_tag(TestReport,'TestRequestList','req_name','req_way','req_svn_num')
+    read_xml.read_third_tag(TestReport, 'TestInputDocument', 'input_doc_name', 'input_doc_way', 'input_doc_svn_num')
+    read_xml.read_second_tag(TestReport,'test_result_1')
+    #print(read_xml)
