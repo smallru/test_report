@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <TestReport>
   <!--车站文档信息配置-->
-  <TestReportName>区间综合监控系统工程数据测试报告（京广线-白马垅站）区间综合监控系统工程数据测试报告（京广线-白马垅站）</TestReportName>
-  <document_num>WC187650X</document_num>
-  <project_num>GC-QJK-JGTL-16-038</project_num>
+  <TestReportName>区间综合监控系统工程数据测试报告(京广线-白马垅站)</TestReportName>
+  <DocumentNum>WC187650X</DocumentNum>
+  <ProjectNum>GC-QJK-JGTL-16-038</ProjectNum>
   <!--测试申请单-->
   <TestRequestList>
     <req_name>2018.07.04.测试申请单-宁西线（郑州局）-WC183829X</req_name>
@@ -37,15 +37,35 @@
     <input_doc_svn_num>20230</input_doc_svn_num>
   </TestInputDocument>
   <!--测试对象-->
-  <A1>COM7</A1>
-  <A2>COM8</A2>
-  <B1>COM9</B1>
-  <B2>COM10</B2>
+  <TestObject>
+    <lower_computer_way>/svn/ApplicationDesign/tags/17京广线/2018年8月26日数据测试申请-WC185443X/白马垅站/目标文件</lower_computer_way>
+    <maintain_terminal_way>/svn/ApplicationDesign/tags/17京广线/2018年8月26日数据测试申请-WC185443X/白马垅站/新版维护终端数据</maintain_terminal_way>
+    <lower_computer_data_01>1_PLAT_JGX_BMLZ_V1.0.1.bin</lower_computer_data_01>
+    <maintain_terminal_data_01>AppCfg_JGX_BMLZ_V1.0.2</maintain_terminal_data_01>
+  </TestObject>
+  <TestObject>
+    <lower_computer_way>/svn/ApplicationDesign/tags/17京广线/2018年8月26日数据测试申请-WC185443X/白马垅站/目标文件</lower_computer_way>
+    <maintain_terminal_way>/svn/ApplicationDesign/tags/17京广线/2018年8月26日数据测试申请-WC185443X/白马垅站/新版维护终端数据</maintain_terminal_way>
+    <lower_computer_data_01>1_PLAT_JGX_BMLZ_V1.0.1.bin</lower_computer_data_01>
+    <maintain_terminal_data_01>AppCfg_JGX_BMLZ_V1.0.2</maintain_terminal_data_01>
+  </TestObject>
   <!--测试配合项-->
-  <TestMatchUp>115200</TestMatchUp>
+  <AppSoftware>V1.0.13</AppSoftware>
+  <MaintainTerminalSoftware>V2.0.9</MaintainTerminalSoftware>
   <!--测试过程-->
-  <TestProcess>1</TestProcess>
+  <TestProcess>
+    <tester>赵晓如</tester>
+    <test_time>20180910</test_time>
+    <bug_num>1</bug_num>
+    <test_conclusion>维护终端数据不通过、下位机数据通过</test_conclusion>
+  </TestProcess>
+  <TestProcess>
+    <tester>赵晓如</tester>
+    <test_time>20180910</test_time>
+    <bug_num>0</bug_num>
+    <test_conclusion>维护终端数据通过</test_conclusion>
+  </TestProcess>
   <!--测试结果-->
-  <test_result_1>1111</test_result_1>
-  <test_result_2>bbbbbbbbb</test_result_2>
+  <TestResult01>对2018.11.05.测试申请单-京广线-WC187777X提交的白马垅站数据进行测试，白马垅站维护终端数据无问题。</TestResult01>
+  <TestResult02> </TestResult02>
 </TestReport>
