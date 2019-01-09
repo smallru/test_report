@@ -13,19 +13,18 @@ def process_data(dict):
     for obj in dict["TestObject"]:
         obj['lower_computer_data_ver'] = obj['lower_computer_data_01'][-10:-4]
         obj['maintain_terminal_data_ver'] = obj['maintain_terminal_data_01'][-6:]
-        obj['lower_computer_data_02'] = '2_STN'+obj['lower_computer_data_01'][6:]
-        obj['lower_computer_data_03'] = '3_FUNC'+obj['lower_computer_data_01'][6:]
-        obj['lower_computer_data_04'] = '4_OBJ'+obj['lower_computer_data_01'][6:]
-        obj['lower_computer_data_05'] = '5_POOL'+obj['lower_computer_data_01'][6:]
-        obj['lower_computer_data_06'] = '6_INTF'+obj['lower_computer_data_01'][6:]
-        obj['maintain_terminal_data_02'] = 'Canvas'+obj['maintain_terminal_data_01'][6:]
-        obj['maintain_terminal_data_03'] = 'DeviceLogic'+obj['maintain_terminal_data_01'][6:]
-    for process in range((len(dict['TestProcess']))):
+        if obj['lower_computer_data_01'] != ' ':
+            obj['lower_computer_data_02'] = '2_STN'+obj['lower_computer_data_01'][6:]
+            obj['lower_computer_data_03'] = '3_FUNC'+obj['lower_computer_data_01'][6:]
+            obj['lower_computer_data_04'] = '4_OBJ'+obj['lower_computer_data_01'][6:]
+            obj['lower_computer_data_05'] = '5_POOL'+obj['lower_computer_data_01'][6:]
+            obj['lower_computer_data_06'] = '6_INTF'+obj['lower_computer_data_01'][6:]
+        if obj['maintain_terminal_data_01'] != ' ':
+            obj['maintain_terminal_data_02'] = 'Canvas'+obj['maintain_terminal_data_01'][6:]
+            obj['maintain_terminal_data_03'] = 'DeviceLogic'+obj['maintain_terminal_data_01'][6:]
+    for process in range(0,(len(dict['TestProcess']))):
         dict['TestProcess'][process]['req_list'] = dict['TestRequestList'][process]['req_name']
         dict['TestProcess'][process]['doc_num'] = dict['TestRequestList'][process]['req_name'][-9:]
-
-
-
 
     #修改名称部分
     dict["doc_name"] = dict.pop('TestReportName')
@@ -37,6 +36,8 @@ def process_data(dict):
     dict["lower_computer_ver"] = dict.pop('AppSoftware')
     dict["maintain_terminal_ver"] = dict.pop('MaintainTerminalSoftware')
     dict["test_process"] = dict.pop('TestProcess')
+    dict["test_result_1"] = dict.pop('TestResult01')
+    dict["test_result_2"] = dict.pop('TestResult02')
     return  dict
 
 #-----------------主程序内容-------------------------#

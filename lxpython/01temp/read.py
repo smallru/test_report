@@ -23,11 +23,12 @@ class Read_xml(object):
         """读取三层标签函数"""
         daughters = parent.getElementsByTagName(daughter)
         daughter_tag_list = []
-        daughter_tag_dic = {}
         for daughteri in daughters:
+            daughter_tag_dic = {}
             for grandson in grandsons:
                 daughter_tag_dic[grandson] = daughteri.getElementsByTagName(grandson)[0].childNodes[0].data
             daughter_tag_list.append(daughter_tag_dic)
+        #print(daughter_tag_list)
         self.xml_dic[daughter] = daughter_tag_list
         #print(self.xml_dic)
 
@@ -42,6 +43,7 @@ def read_xml():
     read_xml.read_second_tag(TestReport, 'TestReportName')
     read_xml.read_second_tag(TestReport, 'DocumentNum')
     read_xml.read_second_tag(TestReport, 'ProjectNum')
+    read_xml.read_second_tag(TestReport, 'ChangeOrder')
     #读取测试申请单
     read_xml.read_third_tag(TestReport,'TestRequestList','req_name','req_way','req_svn_num')
     #读取测试输入文档
@@ -52,8 +54,11 @@ def read_xml():
     read_xml.read_second_tag(TestReport, 'AppSoftware')
     read_xml.read_second_tag(TestReport, 'MaintainTerminalSoftware')
     #读取测试过程
-    read_xml.read_third_tag(TestReport, 'TestProcess', 'tester', 'test_time', 'bug_num','test_conclusion')
+    read_xml.read_third_tag(TestReport, 'TestProcess', 'tester', 'test_time','test_method_01','test_method_02','bug_num','test_conclusion')
     #读取测试结果
     read_xml.read_second_tag(TestReport,'TestResult01')
     read_xml.read_second_tag(TestReport, 'TestResult02')
     return read_xml.xml_dic
+
+if __name__ == '__main__':
+    print(read_xml())
