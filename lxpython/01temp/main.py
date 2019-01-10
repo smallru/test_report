@@ -9,10 +9,10 @@ from read import *
 #处理xml数据为doc内标签内容，并抽取重叠数据
 def process_data(dict):
     #提取信息部分
-    dict['station_name'] = dict['TestReportName'][-5:-1]
+    dict['station_name'] = dict['TestReportName'][dict['TestReportName'].rfind("-")+1:-1]
     for obj in dict["TestObject"]:
         obj['lower_computer_data_ver'] = obj['lower_computer_data_01'][-10:-4]
-        obj['maintain_terminal_data_ver'] = obj['maintain_terminal_data_01'][-6:]
+        obj['maintain_terminal_data_ver'] = obj['maintain_terminal_data_01'][-10:-4]
         if obj['lower_computer_data_01'] != ' ':
             obj['lower_computer_data_02'] = '2_STN'+obj['lower_computer_data_01'][6:]
             obj['lower_computer_data_03'] = '3_FUNC'+obj['lower_computer_data_01'][6:]
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     tpl = DocxTemplate('工程数据测试报告模板.docx')
     xml = read_xml()
     print(xml)
-    content=process_data(xml)
+    content = process_data(xml)
     print(content)
 
     context = content
