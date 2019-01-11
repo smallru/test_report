@@ -32,9 +32,9 @@ class Read_xml(object):
         self.xml_dic[daughter] = daughter_tag_list
         #print(self.xml_dic)
 
-def read_xml():
+def read_xml(path,xml_name):
     # 使用minidom解析器打开 XML 文档
-    DOMTree = xml.dom.minidom.parse("test_report.xml")
+    DOMTree = xml.dom.minidom.parse(path+'/'+xml_name)
     TestReport = DOMTree.documentElement
 
     #创建读取xml对象
