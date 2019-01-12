@@ -1,53 +1,51 @@
-# coding:'utf-8'
+#encoding: utf-8
+"""
+@project=01temp
+@file=test
+@author=xiaoru
+@create_time=2019/1/6 15:42
+"""
+import wx
+import os
 
-from docx import Document
-from docxtpl import DocxTemplate
+from testReport import *
 
-from read import *
-#import write
+def GenerateTestReports(path):
+    #print(os.listdir(path))
+    for xml_name in os.listdir(path):
+        if xml_name[-3:] == 'xml':
+            print(xml_name)
+            TestReport(path,xml_name)
 
-#处理xml数据为doc内标签内容，并抽取重叠数据
-def process_data(dict):
-    #提取信息部分
-    dict['station_name'] = dict['TestReportName'][dict['TestReportName'].rfind("-")+1:-1]
-    for obj in dict["TestObject"]:
-        obj['lower_computer_data_ver'] = obj['lower_computer_data_01'][-10:-4]
-        obj['maintain_terminal_data_ver'] = obj['maintain_terminal_data_01'][-10:-4]
-        if obj['lower_computer_data_01'] != ' ':
-            obj['lower_computer_data_02'] = '2_STN'+obj['lower_computer_data_01'][6:]
-            obj['lower_computer_data_03'] = '3_FUNC'+obj['lower_computer_data_01'][6:]
-            obj['lower_computer_data_04'] = '4_OBJ'+obj['lower_computer_data_01'][6:]
-            obj['lower_computer_data_05'] = '5_POOL'+obj['lower_computer_data_01'][6:]
-            obj['lower_computer_data_06'] = '6_INTF'+obj['lower_computer_data_01'][6:]
-        if obj['maintain_terminal_data_01'] != ' ':
-            obj['maintain_terminal_data_02'] = 'Canvas'+obj['maintain_terminal_data_01'][6:]
-            obj['maintain_terminal_data_03'] = 'DeviceLogic'+obj['maintain_terminal_data_01'][6:]
-    for process in range(0,(len(dict['TestProcess']))):
-        dict['TestProcess'][process]['req_list'] = dict['TestRequestList'][process]['req_name']
-        dict['TestProcess'][process]['doc_num'] = dict['TestRequestList'][process]['req_name'][-9:]
+class MainFrame(wx.Frame):
+    def __init__(self):
+        super().__init__(None, -1, "自动生成测试报告", size=(600, 150))
+        self.m_BasePath = ''
+        panel = wx.Panel(self, -1)
+        self.ChoosePathBtn = wx.Button(panel, -1, "浏览", pos=(500, 15), size=(50, 26))
+        self.InputLineAddressText = wx.TextCtrl(panel, -1, value="请选择读取xml路径", pos=(50, 15), size=(450, 25),
+                                                style=wx.TE_READONLY)
+        self.ExecuteBtn = wx.Button(panel, -1,"请选择", pos=(240, 60), size=(120, 30))
+        self.Bind(wx.EVT_BUTTON, self.OnClick_Path, self.ChoosePathBtn)
+        self.Bind(wx.EVT_BUTTON, self.OnClick_Execute, self.ExecuteBtn)
 
-    #修改名称部分
-    dict["doc_name"] = dict.pop('TestReportName')
-    dict["document_num"] = dict.pop('DocumentNum')
-    dict["PM_num"] = dict.pop('ProjectNum')
-    dict["test_req"] = dict.pop('TestRequestList')
-    dict["input_doc"] = dict.pop('TestInputDocument')
-    dict["test_obj"] = dict.pop('TestObject')
-    dict["lower_computer_ver"] = dict.pop('AppSoftware')
-    dict["maintain_terminal_ver"] = dict.pop('MaintainTerminalSoftware')
-    dict["test_process"] = dict.pop('TestProcess')
-    dict["test_result_1"] = dict.pop('TestResult01')
-    dict["test_result_2"] = dict.pop('TestResult02')
-    return  dict
+    def OnClick_Path(self, event):
+        dialog = wx.DirDialog(None, "选择车站报告xml路径", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
+        if dialog.ShowModal() == wx.ID_OK:
+            self.m_BasePath = dialog.GetPath()
+            self.InputLineAddressText.SetValue(self.m_BasePath)
+        dialog.Destroy()
+        self.ExecuteBtn.SetLabel("开始")
 
-#-----------------主程序内容-------------------------#
+    def OnClick_Execute(self, event):
+        if self.m_BasePath == '':
+            return
+        GenerateTestReports(self.m_BasePath)
+        self.ExecuteBtn.SetLabel("结束")
+
+
 if __name__ == '__main__':
-    tpl = DocxTemplate('工程数据测试报告模板.docx')
-    xml = read_xml()
-    print(xml)
-    content = process_data(xml)
-    print(content)
-
-    context = content
-    tpl.render(context)
-    tpl.save(content['doc_name']+'.docx')
+    app = wx.App()
+    g_Frame = MainFrame()
+    g_Frame.Show()
+    app.MainLoop()
