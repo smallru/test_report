@@ -5,29 +5,38 @@
 @author=xiaoru
 @create_time=2019/1/6 15:42
 """
-from xml.dom.minidom import parse
-import xml.dom.minidom
+import wx
 
-# 使用minidom解析器打开 XML 文档
-DOMTree = xml.dom.minidom.parse("movies.xml")
-collection = DOMTree.documentElement
-if collection.hasAttribute("shelf"):
-    print("Root element : %s" % collection.getAttribute("shelf"))
+class HelloFrame(wx.Frame):
+    """
+    A Frame that says Hello World
+    """
 
-# 在集合中获取所有电影
-movies = collection.getElementsByTagName("movie")
+    def __init__(self, *args, **kw):
+        # ensure the parent's __init__ is called
+        super(HelloFrame, self).__init__(*args, **kw)
 
-# 打印每部电影的详细信息
-for movie in movies:
-    print("*****Movie*****")
-    if movie.hasAttribute("title"):
-        print("Title: %s" % movie.getAttribute("title"))
+        # create a panel in the frame
+        panel = wx.Panel(self,-1)
+        self.button = wx.Button(panel, -1, "start", pos=(150, 20))
+        self.Bind(wx.EVT_BUTTON, self.OnClick, self.button)
+        self.button.SetDefault()
+        b = wx.Button(panel, -1, u"文件夹选择对话框",pos=(150, 90))
+        self.Bind(wx.EVT_BUTTON, self.OnButton, b)
 
-    type = movie.getElementsByTagName('type')[0]
-    print("Type: %s" % type.childNodes[0].data)
-    format = movie.getElementsByTagName('format')[0]
-    print("Format: %s" % format.childNodes[0].data)
-    rating = movie.getElementsByTagName('rating')[0]
-    print("Rating: %s" % rating.childNodes[0].data)
-    description = movie.getElementsByTagName('description')[0]
-    print("Description: %s" % description.childNodes[0].data)
+    def OnClick(self, event):
+        self.button.SetLabel("end")
+
+    def OnButton(self, event):
+        dlg = wx.DirDialog(self, u"选择文件夹", style=wx.DD_DEFAULT_STYLE)
+        if dlg.ShowModal() == wx.ID_OK:
+            print(dlg.GetPath())  # 文件夹路径
+        dlg.Destroy()
+
+if __name__ == '__main__':
+    # When this module is run (not imported) then create the app, the
+    # frame, show it, and start the event loop.
+    app = wx.App()
+    frm = HelloFrame(None, title='Hello World 2')
+    frm.Show()
+    app.MainLoop()
