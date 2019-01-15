@@ -24,6 +24,14 @@ def process_data(dict):
     for process in range(0,(len(dict['TestProcess']))):
         dict['TestProcess'][process]['req_list'] = dict['TestRequestList'][process]['req_name']
         dict['TestProcess'][process]['doc_num'] = dict['TestRequestList'][process]['req_name'][-9:]
+    if dict['AppSoftware'] == ' ':
+        dict['platform_software_ver'] =''
+        dict['Commun01_board_ver'] = ''
+        dict['Commun03_board_ver'] = ''
+    else:
+        dict['platform_software_ver'] ='V1.0.1'
+        dict['Commun01_board_ver'] = 'V1.0.2'
+        dict['Commun03_board_ver'] = 'V0.0.3'
 
     #修改名称部分
     dict["doc_name"] = dict.pop('TestReportName')

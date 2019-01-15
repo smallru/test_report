@@ -61,4 +61,4 @@ def read_xml(path,xml_name):
     return read_xml.xml_dic
 
 if __name__ == '__main__':
-    print(read_xml())
+    print(read_xml('C:/Users\zhaox\Desktop\wanzhuanhub\lxpython\lxpython/01temp','test_report.xml'))

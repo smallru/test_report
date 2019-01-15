@@ -67,7 +67,7 @@
     <maintain_terminal_data_01> </maintain_terminal_data_01>
   </TestObject>
   <!--测试配合项-->
-  <AppSoftware>V1.0.13</AppSoftware>
+  <AppSoftware> </AppSoftware>
   <MaintainTerminalSoftware>V2.0.9</MaintainTerminalSoftware>
   <!--测试过程-->
   <TestProcess>
