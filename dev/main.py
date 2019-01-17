@@ -26,7 +26,10 @@ class MainFrame(wx.Frame):
         self.io_list_svn = ''
         self.dish_face_svn = ''
         self.bom_list_svn = ''
-        self.test_data_path = []
+        self.test_data_path = ''
+        self.test_data_path_list = []
+        self.test_data_svn = ''
+        self.test_data_svn_list = []
         self.test_num = 0
         self.the_num = [x for x in range(2, 10)]
         super().__init__(None, -1, "自动生成测试报告", size=(800, 500))
@@ -79,14 +82,18 @@ class MainFrame(wx.Frame):
         self.testDataPathOption = wx.Button(panel3, -1, "浏览", pos=(220, 40), size=(50, 30))
         self.Bind(wx.EVT_BUTTON, self.OnClick_testDataPath, self.testDataPathOption)
         #测试申请单SVN
-        self.stationDocSvnText = wx.StaticText(panel3, label='第1轮测试申请单SVN： ', pos=(20, 80))
-        self.stationDocSvn = wx.TextCtrl(panel3, -1, value="", pos=(170, 80), size=(60, 20))
-        self.Bind(wx.EVT_TEXT, self.EvtText_station_doc_svn, self.stationDocSvn)
+        self.testDataSvnText = wx.StaticText(panel3, label='第1轮测试申请单SVN： ', pos=(20, 80))
+        self.testDataSvn = wx.TextCtrl(panel3, -1, value="", pos=(170, 80), size=(60, 20))
+        self.Bind(wx.EVT_TEXT, self.EvtText_test_data_svn, self.testDataSvn)
+        self.testDataSvn.Enable(False)
         #轮数确定按钮
         self.num_ensure = wx.Button(panel3, -1, "确定", pos=(170, 120), size=(50, 30))
-        self.Bind(wx.EVT_TEXT, self.Num_ensure, self.num_ensure)
+        self.Bind(wx.EVT_BUTTON, self.OnClick_Num_ensure, self.num_ensure)
+        self.num_ensure.Enable(False)
         #轮数清空按钮
         self.num_clear = wx.Button(panel3, -1, "重置", pos=(20, 120), size=(50, 30))
+        self.Bind(wx.EVT_BUTTON, self.OnClick_num_clear, self.num_clear)
+        self.num_clear.Enable(False)
 
 
 
@@ -109,13 +116,16 @@ class MainFrame(wx.Frame):
         dialog.Destroy()
 
     def OnClick_testDataPath(self, event):
+        self.num_clear.Enable(True)
         dialog = wx.DirDialog(None, "请选择测试申请单路径", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
         if dialog.ShowModal() == wx.ID_OK:
-            self.test_data_path.append(dialog.GetPath())
-            self.testDataPath.SetValue('请选择第'+str(self.the_num[self.test_num])+'轮测试路径')
-            self.stationDocSvnText.SetLabel('第'+str(self.the_num[self.test_num])+'轮测试申请单SVN： ')
+            self.test_data_path = dialog.GetPath()
+            self.testDataPath.SetValue(dialog.GetPath())
         dialog.Destroy()
-        self.test_num+=1
+        if self.test_data_path in self.test_data_path_list:
+            self.testDataPath.SetValue('选择重复路径，请重新选择')
+        else:
+            self.testDataSvn.Enable(True)
 
     def EvtText_system_doc_svn(self, event):
         self.system_doc_svn = event.GetString()
@@ -127,9 +137,29 @@ class MainFrame(wx.Frame):
         self.dish_face_svn = event.GetString()
     def EvtText_bom_list_svn(self, event):
         self.bom_list_svn = event.GetString()
+    def EvtText_test_data_svn(self, event):
+        self.test_data_svn = event.GetString()
+        self.num_ensure.Enable(True)
 
-    def Num_ensure(self, event):
-         ######
+    def OnClick_Num_ensure(self, event):
+        self.test_data_path_list.append(self.test_data_path)
+        self.test_data_svn_list.append(self.test_data_svn)
+        self.testDataPath.SetValue('请选择第' + str(self.the_num[self.test_num]) + '轮测试路径')
+        self.testDataSvnText.SetLabel('第' + str(self.the_num[self.test_num]) + '轮测试申请单SVN： ')
+        self.test_num += 1
+        self.testDataSvn.Enable(False)
+        self.num_ensure.Enable(False)
+
+    def OnClick_num_clear(self, event):
+        self.test_data_path = ''
+        self.test_data_path_list = []
+        self.test_data_svn = ''
+        self.test_data_svn_list = []
+        self.test_num = 0
+        self.testDataPath.SetValue('请选择第1轮测试路径')
+        self.testDataSvnText.SetLabel('第1轮测试申请单SVN： ')
+
+
 
 
     def OnClick_Execute(self, event):
@@ -147,4 +177,4 @@ if __name__ == '__main__':
     g_Frame = MainFrame()
     g_Frame.Show()
     app.MainLoop()
-    print(g_Frame.test_data_path)
+    print(g_Frame.test_data_path_list,g_Frame.test_data_svn_list)
