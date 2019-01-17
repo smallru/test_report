@@ -26,48 +26,71 @@ class MainFrame(wx.Frame):
         self.io_list_svn = ''
         self.dish_face_svn = ''
         self.bom_list_svn = ''
+        self.test_data_path = []
+        self.test_num = 0
+        self.the_num = [x for x in range(2, 10)]
         super().__init__(None, -1, "自动生成测试报告", size=(800, 500))
+        #self.SetBackgroundColour('white')
         panel = wx.Panel(self, -1)
-
+        panel2 = wx.Panel(panel, -1,pos=(0,0),size=(250,350))
+        panel3 = wx.Panel(panel, -1, pos=(250, 0), size=(300, 350))
+        panel2.SetBackgroundColour('white')
+        panel3.SetBackgroundColour('white')
         #系统方案路径窗口
-        self.systemDocPathText = wx.StaticText(panel, label="系统方案路径：", pos=(20, 20))
-        self.systemDocPath = wx.TextCtrl(panel, -1, value="请选择系统方案路径", pos=(20, 40), size=(150, 20),
+        self.systemDocPathText = wx.StaticText(panel2, label="系统方案路径：", pos=(20, 20))
+        self.systemDocPath = wx.TextCtrl(panel2, -1, value="请选择系统方案路径", pos=(20, 40), size=(150, 20),
                                          style=wx.TE_READONLY)
-        self.systemDocPathOption = wx.Button(panel, -1, "浏览", pos=(170, 40), size=(50, 20))
+        self.systemDocPathOption = wx.Button(panel2, -1, "浏览", pos=(170, 40), size=(50, 20))
         self.Bind(wx.EVT_BUTTON, self.OnClick_systemDocPath, self.systemDocPathOption)
 
         #系统方案SVN号窗口
-        self.systemDocSvnText = wx.StaticText(panel, label="系统方案SVN号：", pos=(20, 80))
-        self.systemDocSvn = wx.TextCtrl(panel, -1, value="", pos=(120, 80), size=(100, 20))
+        self.systemDocSvnText = wx.StaticText(panel2, label="系统方案SVN号：", pos=(20, 80))
+        self.systemDocSvn = wx.TextCtrl(panel2, -1, value="", pos=(120, 80), size=(100, 20))
         self.Bind(wx.EVT_TEXT, self.EvtText_system_doc_svn, self.systemDocSvn)
 
         #车站方案路径窗口
-        self.stationDocPathText = wx.StaticText(panel, label="车站方案路径：", pos=(20, 140))
-        self.stationDocPath = wx.TextCtrl(panel, -1, value="请选择车站方案路径", pos=(20, 160), size=(150, 20),
+        self.stationDocPathText = wx.StaticText(panel2, label="车站方案路径：", pos=(20, 140))
+        self.stationDocPath = wx.TextCtrl(panel2, -1, value="请选择车站方案路径", pos=(20, 160), size=(150, 20),
                                          style=wx.TE_READONLY)
-        self.stationDocPathOption = wx.Button(panel, -1, "浏览", pos=(170, 160), size=(50, 20))
+        self.stationDocPathOption = wx.Button(panel2, -1, "浏览", pos=(170, 160), size=(50, 20))
         self.Bind(wx.EVT_BUTTON, self.OnClick_stationDocPath, self.stationDocPathOption)
 
         #SVN号窗口
-        self.stationDocSvnText = wx.StaticText(panel, label="车站方案SVN号：", pos=(20, 200))
-        self.stationDocSvn = wx.TextCtrl(panel, -1, value="", pos=(120, 200), size=(100, 20))
+        self.stationDocSvnText = wx.StaticText(panel2, label="车站方案SVN号：", pos=(20, 200))
+        self.stationDocSvn = wx.TextCtrl(panel2, -1, value="", pos=(120, 200), size=(100, 20))
         self.Bind(wx.EVT_TEXT, self.EvtText_station_doc_svn, self.stationDocSvn)
 
-        self.ioListSvnText = wx.StaticText(panel, label="IO配线表SVN号：", pos=(20, 240))
-        self.ioListDocSvn = wx.TextCtrl(panel, -1, value="", pos=(120, 240), size=(100, 20))
+        self.ioListSvnText = wx.StaticText(panel2, label="IO配线表SVN号：", pos=(20, 240))
+        self.ioListDocSvn = wx.TextCtrl(panel2, -1, value="", pos=(120, 240), size=(100, 20))
         self.Bind(wx.EVT_TEXT, self.EvtText_io_list_svn, self.ioListDocSvn)
 
-        self.dishFaceSvnText = wx.StaticText(panel, label="盘面图SVN号：", pos=(20, 280))
-        self.dishFaceSvn = wx.TextCtrl(panel, -1, value="", pos=(120, 280), size=(100, 20))
+        self.dishFaceSvnText = wx.StaticText(panel2, label="盘面图SVN号：", pos=(20, 280))
+        self.dishFaceSvn = wx.TextCtrl(panel2, -1, value="", pos=(120, 280), size=(100, 20))
         self.Bind(wx.EVT_TEXT, self.EvtText_dish_face_svn, self.dishFaceSvn)
 
-        self.bomListSvnText = wx.StaticText(panel, label="BOM表SVN号：", pos=(20, 320))
-        self.bomListSvn = wx.TextCtrl(panel, -1, value="", pos=(120, 320), size=(100, 20))
+        self.bomListSvnText = wx.StaticText(panel2, label="BOM表SVN号：", pos=(20, 320))
+        self.bomListSvn = wx.TextCtrl(panel2, -1, value="", pos=(120, 320), size=(100, 20))
         self.Bind(wx.EVT_TEXT, self.EvtText_bom_list_svn, self.bomListSvn)
 
+        # 测试路径窗口
+        self.testDataPathText = wx.StaticText(panel3, label="测试申请单测试路径：", pos=(20, 20))
+        self.testDataPath = wx.TextCtrl(panel3, -1, value="请选择第1轮测试路径", pos=(20, 40), size=(200, 30),
+                                         style=wx.TE_READONLY)
+        self.testDataPathOption = wx.Button(panel3, -1, "浏览", pos=(220, 40), size=(50, 30))
+        self.Bind(wx.EVT_BUTTON, self.OnClick_testDataPath, self.testDataPathOption)
+        #测试申请单SVN
+        self.stationDocSvnText = wx.StaticText(panel3, label='第1轮测试申请单SVN： ', pos=(20, 80))
+        self.stationDocSvn = wx.TextCtrl(panel3, -1, value="", pos=(170, 80), size=(60, 20))
+        self.Bind(wx.EVT_TEXT, self.EvtText_station_doc_svn, self.stationDocSvn)
+        #轮数确定按钮
+        self.num_ensure = wx.Button(panel3, -1, "确定", pos=(170, 120), size=(50, 30))
+        self.Bind(wx.EVT_TEXT, self.Num_ensure, self.num_ensure)
+        #轮数清空按钮
+        self.num_clear = wx.Button(panel3, -1, "重置", pos=(20, 120), size=(50, 30))
 
 
-        self.ExecuteBtn = wx.Button(panel, -1,"开始生成报告", pos=(600, 400), size=(100, 30))
+
+        self.ExecuteBtn = wx.Button(panel2, -1,"开始生成报告", pos=(600, 400), size=(100, 30))
         self.Bind(wx.EVT_BUTTON, self.OnClick_Execute, self.ExecuteBtn)
 
     def OnClick_systemDocPath(self, event):
@@ -85,6 +108,15 @@ class MainFrame(wx.Frame):
             self.stationDocPath.SetValue(self.station_doc_path)
         dialog.Destroy()
 
+    def OnClick_testDataPath(self, event):
+        dialog = wx.DirDialog(None, "请选择测试申请单路径", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
+        if dialog.ShowModal() == wx.ID_OK:
+            self.test_data_path.append(dialog.GetPath())
+            self.testDataPath.SetValue('请选择第'+str(self.the_num[self.test_num])+'轮测试路径')
+            self.stationDocSvnText.SetLabel('第'+str(self.the_num[self.test_num])+'轮测试申请单SVN： ')
+        dialog.Destroy()
+        self.test_num+=1
+
     def EvtText_system_doc_svn(self, event):
         self.system_doc_svn = event.GetString()
     def EvtText_station_doc_svn(self, event):
@@ -96,6 +128,8 @@ class MainFrame(wx.Frame):
     def EvtText_bom_list_svn(self, event):
         self.bom_list_svn = event.GetString()
 
+    def Num_ensure(self, event):
+         ######
 
 
     def OnClick_Execute(self, event):
@@ -113,4 +147,4 @@ if __name__ == '__main__':
     g_Frame = MainFrame()
     g_Frame.Show()
     app.MainLoop()
-    print(g_Frame.station_doc_svn,g_Frame.system_doc_svn,g_Frame.io_list_svn,g_Frame.dish_face_svn,g_Frame.bom_list_svn)
+    print(g_Frame.test_data_path)
