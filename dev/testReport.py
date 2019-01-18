@@ -39,11 +39,9 @@ def process_data(dict):
     dict["test_result_2"] = dict.pop('TestResult02')
     return  dict
 
-def TestReport(path,xml_name):
+def TestReport(new_dict):
     tpl = DocxTemplate('工程数据测试报告模板.docx')
-    xml = read_xml(path,xml_name)
-    #print(xml)
-    content = process_data(xml)
+    content = process_data(new_dict)
     #print(content)
 
     context = content
