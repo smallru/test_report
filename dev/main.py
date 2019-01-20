@@ -89,7 +89,7 @@ class MainFrame(wx.Frame):
         self.testDataPathText = wx.StaticText(panel3, label="测试申请单测试路径：", pos=(10, 20))
         self.testDataPath = wx.TextCtrl(panel3, -1, value="请选择第1轮测试路径", pos=(10, 40), size=(240, 25),
                                          style=wx.TE_READONLY)
-        self.testDataPathOption = wx.Button(panel3, -1, "浏览", pos=(250, 40), size=(50, 25))
+        self.testDataPathOption = wx.Button(panel3, -1, "浏览", pos=(250, 40), size=(40, 25))
         self.Bind(wx.EVT_BUTTON, self.OnClick_testDataPath, self.testDataPathOption)
         #测试申请单SVN
         self.testDataSvnText = wx.StaticText(panel3, label='第1轮测试申请单SVN： ', pos=(40, 80))
@@ -112,7 +112,7 @@ class MainFrame(wx.Frame):
         self.testResultText = wx.StaticText(panel3, label="第1轮测试结果：", pos=(10, 270))
         self.testResultList = ['维护终端数据通过，下位机数据通过', '维护终端数据不通过，下位机数据不通过',
                            '维护终端数据通过，下位机数据不通过','维护终端数据不通过，下位机数据通过',
-                           '维护终端数据通过','下位机数据通过']
+                           '维护终端数据不通过','维护终端数据通过','下位机数据不通过','下位机数据通过']
         self.testResult = wx.Choice(panel3, pos=(20, 290), size=(260, -1), choices=self.testResultList)
         #轮数确定按钮
         self.num_ensure = wx.Button(panel3, -1, "确定", pos=(170, 330), size=(50, 30))
@@ -125,7 +125,7 @@ class MainFrame(wx.Frame):
 
         #零散信息
         self.docNameText = wx.StaticText(panel4, label="方案名称：", pos=(10, 20))
-        self.docName = wx.TextCtrl(panel4, -1, value="", pos=(10, 40), size=(250, 25))
+        self.docName = wx.TextCtrl(panel4, -1, value="", pos=(10, 40), size=(280, 25))
         #self.Bind(wx.EVT_TEXT, self.EvtText_doc_name, self.docName)
         self.docNumText = wx.StaticText(panel4, label="文档编号：", pos=(10, 80))
         self.docNum = wx.TextCtrl(panel4, -1, value="", pos=(80, 80), size=(100, 25))
@@ -133,7 +133,7 @@ class MainFrame(wx.Frame):
         self.itemNum = wx.TextCtrl(panel4, -1, value="", pos=(80, 120), size=(100, 25))
         #self.Bind(wx.EVT_TEXT, self.EvtText_doc_num, self.docNum)
         self.changeOrderText = wx.StaticText(panel4, label="变更单名称：", pos=(10, 160))
-        self.changeOrder = wx.TextCtrl(panel4, -1, value="", pos=(10, 180), size=(250, 25))
+        self.changeOrder = wx.TextCtrl(panel4, -1, value="", pos=(10, 180), size=(280, 25))
         #self.Bind(wx.EVT_TEXT, self.EvtText_change_order, self.changeOrder)
         self.appSoftwareText = wx.StaticText(panel4, label="下位机软件版本：", pos=(10, 220))
         self.appSoftware = wx.TextCtrl(panel4, -1, value="V1.0.14", pos=(120, 220),size=(100, 25))
