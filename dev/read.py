@@ -32,9 +32,9 @@ class Read_xml(object):
         self.xml_dic[daughter] = daughter_tag_list
         #print(self.xml_dic)
 
-def read_xml(path,xml_name):
+def read_xml(xml_name):
     # 使用minidom解析器打开 XML 文档
-    DOMTree = xml.dom.minidom.parse(path+'/'+xml_name)
+    DOMTree = xml.dom.minidom.parse(xml_name)
     TestReport = DOMTree.documentElement
 
     #创建读取xml对象
@@ -61,4 +61,4 @@ def read_xml(path,xml_name):
     return read_xml.xml_dic
 
 if __name__ == '__main__':
-    print(read_xml('C://Users\zhaox\Desktop\GitHub\lxpython\lxpython\\01temp','test_report.xml'))
+    print(read_xml('test_report.xml'))
