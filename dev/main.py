@@ -160,7 +160,7 @@ class MainFrame(wx.Frame):
             self.station_doc_path = dialog.GetPath()
             self.stationDocPath.SetValue(self.station_doc_path)
         dialog.Destroy()
-        item_name = re.sub("[A-Za-z0-9\!\%\[\]\,\。]", "", self.station_doc_path.split('\\')[-2])
+        item_name = re.sub("[A-Za-z0-9\!\%\[\]\,\_]", "", self.station_doc_path.split('\\')[-2])
         station_name = re.sub("[A-Za-z0-9\!\%\[\]\,\。]", "", self.station_doc_path.split('\\')[-1])
         self.docName.SetValue('区间综合监控系统工程数据测试报告'+'('+item_name+'-'+station_name+')')
 
@@ -242,8 +242,9 @@ class MainFrame(wx.Frame):
                 'doc_num':self.docNum.GetValue(),'item_num':self.itemNum.GetValue(),'change_order':self.changeOrder.GetValue(),'app_software':self.appSoftware.GetValue(),
                 'terminal_Software':self.terminalSoftware.GetValue()}
         print('界面程序输入信息字典:%s'%dic)
+        self.start.SetLabel("正在生成报告")
         GenerateTestReports(dic)
-        self.start.SetLabel("结束")
+        self.start.SetLabel("开始生成报告")
 
 if __name__ == '__main__':
     app = wx.App()
