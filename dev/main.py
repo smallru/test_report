@@ -40,7 +40,7 @@ class MainFrame(wx.Frame):
         #self.app_software = ''
         #self.terminal_Software = ''
 
-        super().__init__(None, -1, "自动生成测试报告V1.0", size=(960, 500))
+        super().__init__(None, -1, "自动生成测试报告V1.1", size=(960, 500))
         #self.SetBackgroundColour('white')
         panel = wx.Panel(self, -1)
         panel2 = wx.Panel(panel, -1,pos=(10,30),size=(300,380))
@@ -162,7 +162,7 @@ class MainFrame(wx.Frame):
         dialog.Destroy()
         item_name = re.sub("[A-Za-z0-9\!\%\[\]\,\_]", "", self.station_doc_path.split('\\')[-2])
         station_name = re.sub("[A-Za-z0-9\!\%\[\]\,\。]", "", self.station_doc_path.split('\\')[-1])
-        self.docName.SetValue('区间综合监控系统工程数据测试报告'+'('+item_name+'-'+station_name+')')
+        self.docName.SetValue('区间综合监控系统工程数据测试报告'+'('+item_name.strip()+'-'+station_name+')')
 
     def OnClick_testDataPath(self, event):
         self.num_clear.Enable(True)
@@ -175,7 +175,7 @@ class MainFrame(wx.Frame):
             self.testDataPath.SetValue('选择重复路径，请重新选择')
         else:
             self.testDataSvn.Enable(True)
-            #self.num_ensure.Enable(True)
+            self.num_ensure.Enable(True)
 
     def EvtText_system_doc_svn(self, event):
         self.system_doc_svn = event.GetString()

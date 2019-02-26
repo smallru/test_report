@@ -19,8 +19,14 @@ def DealDict(dict):
     test_num = 1
     for TestNum in dict['test_data']:
         req_path = os.path.abspath(os.path.dirname(TestNum[0]))
-        req_name = os.path.basename(req_path)
-        print('第%s轮测试申请单名称:%s'%(test_num,req_name))
+        req_name = ''
+        for req in os.listdir(req_path):
+            if req.find('申请单') != -1:
+                req_name = req
+        if '.pdf' in req_name:
+            req_name = req_name[:-4]
+        #req_name = os.path.basename(req_path)
+        print('第%s轮测试申请单名称:%s' % (test_num, req_name))
         print('第%s轮数据申请单位置：%s'%(test_num,req_path))
         req_way = '/svn/ApplicationDesign/tags/'+str(req_path.split("\\")[-2])+'/'+str(req_path.split('\\')[-1])
         station_data_way = '/svn/ApplicationDesign/tags' + TestNum[0].split("tags")[-1].replace('\\','/')
