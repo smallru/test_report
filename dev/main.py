@@ -220,7 +220,7 @@ class MainFrame(wx.Frame):
         self.test_data_path = ''
         self.test_data_path_list = []
         self.test_data = []
-        self.test_data_svn = ''
+        #self.test_data_svn = ''
         self.test_num = 0
         self.doc_name = ''
         self.doc_num = ''
