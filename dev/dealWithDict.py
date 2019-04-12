@@ -9,6 +9,7 @@ def DealDict(dict):
     new_dict["ProjectNum"] = dict['item_num']
     new_dict["AppSoftware"] = dict['app_software']
     new_dict["MaintainTerminalSoftware"] = dict['terminal_Software']
+    #new_dict["ChangeOrderSvn"] = dict['change_order_svn']
 
     #导入测试申请单，导入测试过程，导入测试结果
     TestRequestList = []
@@ -143,22 +144,36 @@ def DealDict(dict):
                                       'input_doc_svn_num': dict['bom_list_svn']})
     new_dict['TestInputDocument'] = TestInputDocument
 
-    if dict['change_order'] != '':
-        new_dict["ChangeOrder"] = str(len(TestInputDocument)+1)+'.'+dict['change_order']
+    #导入测试变更单
+    change_order_path = dict['change_order_path']
+    change_order_path_Pdf = os.path.abspath(os.path.dirname(change_order_path))
+    change_order_way = '/svn/ApplicationDesign/tags' + change_order_path_Pdf.split("tags")[-1].replace('\\', '/')
+    #print(os.listdir(change_order_path_Pdf))
+    change_order_name = ''
+    for change_name in os.listdir(change_order_path_Pdf):
+        if change_name.find('变更单') != -1:
+            change_order_name = change_name
+            print('找到测试变更单:%s，并导入' % change_order_name)
+    if change_order_name != '':
+        TestInputDocument.append({'input_doc_name': change_order_name, 'input_doc_way': change_order_way,
+                                  'input_doc_svn_num': dict['change_order_svn']})
+
     return new_dict
 
 if __name__ == '__main__':
 
-    dic = {'system_doc_path': 'C:\\Users\\zhaox\\Desktop\\cangku\\lxpython\\dev\\ApplicationDesign\\controled\\17京广线\\1岳阳站',
+    dic = {'system_doc_path': 'C:\\Users\\zhaox\\Desktop\\工程数据库\\controled\\17京广线\\1岳阳站',
            'system_doc_svn': '1111',
-           'station_doc_path': 'C:\\Users\\zhaox\\Desktop\\cangku\\lxpython\\dev\\ApplicationDesign\\controled\\17京广线\\12白马垅站',
+           'station_doc_path': 'C:\\Users\\zhaox\\Desktop\\工程数据库\\controled\\17京广线\\12白马垅站',
            'station_doc_svn': '1', 'io_list_svn': '2', 'dish_face_svn': '3', 'bom_list_svn': '4',
-           'test_data': [['C:\\Users\\zhaox\\Desktop\\cangku\\lxpython\\dev\\ApplicationDesign\\tags\\17京广线\\2018年8月26日数据测试申请-WC185443X\\白马垅站',
+           'change_order_path': 'C:\\Users\\zhaox\\Desktop\\工程数据库\\tags\\80 包兰线_AG17039A_A\\2019年4月4日数据测试申请-WC191654X\\包头站',
+           'change_order_svn': '1212112',
+           'test_data': [['C:\\Users\\zhaox\\Desktop\\工程数据库\\tags\\17京广线\\2018年8月26日数据测试申请-WC185443X\\白马垅站',
                           '11', '牟林杰', '2019.11.11', '执行检查表', '0', '维护终端数据通过，下位机数据通过'],
-                         ['C:\\Users\\zhaox\\Desktop\\cangku\\lxpython\\dev\\ApplicationDesign\\tags\\17京广线\\2018年10月12日数据测试申请-WC186688X\\白马垅站',
+                         ['C:\\Users\\zhaox\\Desktop\\工程数据库\\tags\\17京广线\\2018年10月12日数据测试申请-WC186688X\\白马垅站',
                           '22', '牟林杰', '2019.11.11', '执行变更记录单', '1', '维护终端数据不通过，下位机数据通过']],
            'doc_name': '区间综合监控系统维护终端工程数据变更测试报告1（苏抚线-榆树台站）',
-           'doc_num': 'WC189242X', 'item_num':'GC-QJK-SF-16-024','change_order': '2018.08.23设计变更单-京广线.wps-WB184724X',
+           'doc_num': 'WC189242X', 'item_num':'GC-QJK-SF-16-024',
            'app_software': 'V2.0.9', 'terminal_Software': 'V2.0.9'}
     new_dic = DealDict(dic)
     print(new_dic)
